@@ -1,0 +1,9 @@
+# Upstream splits the engine with `#[cfg(closed)]`.  Without the flag, `inner` is not compiled
+# at all and the binary silently degrades: encrypted built-in resources stay undecryptable
+# (`load_res` does not even exist), `load_res_tex` returns a black texture, the play record is
+# never sealed, the device probe never runs, and the BGM is never loaded.
+#
+# The recovered module lives here as ordinary source, so the flag belongs to the repository —
+# not to an environment variable someone has to remember to export.
+[build]
+rustflags = ["--cfg", "closed"]

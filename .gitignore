@@ -1,13 +1,9 @@
-inner.rs
+# --- upstream ---
 
 /target
-/assets/font.ttf
 /cache
 /data
-/.cargo
 /config.txt
-/assets/background.jpg
-/assets/res
 /monitor-config.yml
 /.vscode
 
@@ -28,7 +24,6 @@ inner.rs
 /dist
 /project.yml
 /prpr.scent
-/.cargo
 
 # Test
 
@@ -36,7 +31,40 @@ inner.rs
 /log*
 /build_event_debug.sh
 
-
 # OHOS
 
 /phira/dist/
+
+# --- this fork ---
+#
+# Three of upstream's ignores are deliberately *not* carried over, because they would silently
+# drop the parts this fork exists for:
+#
+#   inner.rs     the recovered module
+#   /.cargo      the `--cfg closed` switch that enables it
+#   /assets/res  the plaintext resources the packer encrypts
+#   /assets/font.ttf, /assets/background.jpg
+#                the engine refuses to start without them
+
+# Gradle / Android
+
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+*.apk
+*.aab
+
+# Produced by build.ps1
+
+android/app/src/main/jniLibs/
+android/app/src/main/assets/
+
+# Local
+
+__pycache__/
+
+keystore.jks
+build.log
+_toolchain/
